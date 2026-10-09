@@ -63,7 +63,7 @@ body::after{content:"";position:fixed;inset:-50%;z-index:250;pointer-events:none
 @media (pointer:fine){.anim body::after{animation:grain 1s steps(4) infinite}}
 @keyframes grain{25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}}
 /* buttons */
-.pill{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:56px;padding:0 28px;border-radius:999px;background:var(--forest);color:var(--paper);text-decoration:none;font:600 15px/1.2 var(--sans);letter-spacing:.01em;border:1px solid var(--forest);overflow:hidden;isolation:isolate;cursor:pointer;text-align:center;will-change:transform}
+.pill{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:56px;padding:0 28px;border-radius:999px;background:var(--forest);color:var(--paper);text-decoration:none;font:600 15px/1.2 var(--sans);letter-spacing:.01em;border:1px solid var(--forest);overflow:clip;isolation:isolate;cursor:pointer;text-align:center;will-change:transform}
 .pill::before{content:"";position:absolute;inset:0;background:var(--green);border-radius:inherit;transform:translateY(101%);transition:transform .55s var(--ease);z-index:-1}
 .pill:hover::before{transform:none}
 .pill .dot{width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
@@ -138,7 +138,7 @@ body::after{content:"";position:fixed;inset:-50%;z-index:250;pointer-events:none
 .mast{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding:96px 0 14px;border-bottom:1px solid var(--prule);font:600 11.5px var(--sans);letter-spacing:.18em;text-transform:uppercase;opacity:.9}
 .mast span:nth-child(2){text-align:center}.mast span:nth-child(3){text-align:right}
 .hero__in{padding-bottom:clamp(100px,13vh,140px)}
-.hero h1{font:300 clamp(48px,7.6vw,124px)/.96 var(--serif);letter-spacing:-.035em;margin:0 0 22px;max-width:13ch}
+.hero h1{font:300 clamp(42px,min(7vw,11vh),124px)/.96 var(--serif);letter-spacing:-.035em;margin:0 0 22px;max-width:13ch}
 .hero h1 .l{display:block}
 .rot{display:block;font-style:italic;color:#C9E39A;min-height:1em;white-space:nowrap;transition:opacity .45s ease,transform .6s var(--ease),filter .5s}
 .rot.out{opacity:0;transform:translateY(-.18em)}
@@ -299,6 +299,7 @@ body::after{content:"";position:fixed;inset:-50%;z-index:250;pointer-events:none
 .tst__ctl [role=tab]{width:44px;height:44px;border-radius:50%;border:1px solid var(--prule);background:transparent;cursor:pointer;font:italic 400 15px var(--serif);color:var(--paper)}
 .tst__ctl [role=tab][aria-selected="true"]{background:var(--paper);color:var(--forest)}
 .clist{font:300 clamp(26px,3vw,42px)/1.32 var(--serif);letter-spacing:-.015em;margin:18px 0 0}
+.clist span{display:inline-block;white-space:nowrap}
 .clist i{font-style:normal;color:var(--sage);margin:0 .3em}
 .acc-list{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}
 .acc-list li{border-top:1px solid var(--rule);padding:12px 0;font-size:15px;display:flex;gap:12px}
@@ -363,7 +364,7 @@ form.done .form-status{font:300 clamp(26px,2.6vw,34px)/1.25 var(--serif);color:v
 .phero .mast span:nth-child(2){text-align:right}
 .phero__in{padding-top:28px;padding-bottom:calc(var(--r) + clamp(36px,5vw,64px))}
 .phero__row{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);gap:20px 56px;align-items:end}
-.phero h1{font:300 clamp(42px,6.2vw,100px)/1 var(--serif);letter-spacing:-.03em;margin:0}
+.phero h1{font:300 clamp(36px,min(5.8vw,9.6vh),100px)/1 var(--serif);letter-spacing:-.03em;margin:0}
 .phero h1 em{font-style:italic;color:#C9E39A}
 .phero .lede{font:italic 400 clamp(19px,1.7vw,24px)/1.35 var(--serif);color:rgba(243,239,230,.9);margin:0}
 .split .w{display:inline-block;white-space:nowrap}
@@ -552,15 +553,37 @@ form.done .form-status{font:300 clamp(26px,2.6vw,34px)/1.25 var(--serif);color:v
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
 }
 
+/* ---- Phase 6: laptop screens ---- */
+.cvi{content-visibility:auto;contain-intrinsic-size:auto 1400px}
+@media (min-width:900px){
+  .journal{padding-top:clamp(56px,9vh,130px);padding-bottom:clamp(36px,6vh,100px)}
+  .journal .head{margin-bottom:clamp(18px,3.4vh,56px)}
+  .journal .jcard{width:clamp(240px,36vh,420px)}
+  .journal .jcard__img,.journal .jcard:nth-child(3n+2) .jcard__img{aspect-ratio:auto;height:clamp(190px,40vh,520px)}
+  .journal .jcard:nth-child(even){margin-top:clamp(0px,3.5vh,56px)}
+  .journal .jbar{margin-top:clamp(14px,2.4vh,28px)}
+}
+@media (min-width:900px) and (max-height:820px){ .journal .jcard__sum{display:none} .journal .jcard__cap{margin-top:10px;padding-top:10px} .journal .head h2.h{font-size:clamp(30px,min(4vw,7vh),60px)} }
+.pc{max-height:calc(100svh - 98px - var(--i) * 22px - 24px)}
+.pc__txt{padding:clamp(20px,min(3.6vw,5vh),52px)}
+.pc h3{font-size:clamp(24px,min(2.8vw,4.6vh),42px)}
+.pc__no{font-size:clamp(44px,min(7vw,11vh),120px)}
+@media (max-height:760px){
+  .pc{position:relative;top:auto;max-height:none;transform:none!important}
+  .stack{gap:18px}
+}
+
 /* ---- Phase 5: magazine issue ---- */
 .cover{position:relative;min-height:92vh;min-height:92svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;background:#0B3A3F;color:var(--paper);isolation:isolate}
 .cover__img{position:absolute;inset:0;z-index:-2;margin:0}
 .cover__img img{width:100%;height:100%;object-fit:cover;transform:scale(1.03)}
 .anim .cover__img img{animation:kb 18s linear both}
 .cover::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(5,44,49,.55) 0%,rgba(5,44,49,.05) 30%,rgba(5,44,49,.3) 55%,rgba(4,34,38,.9) 100%)}
-.cover__in{padding-bottom:clamp(96px,12vh,130px)}
+.cover{min-height:min(92svh,900px)}
+.cover__in{padding-bottom:clamp(64px,10vh,130px)}
+.cover .stand{margin-bottom:clamp(14px,2.6vh,26px)}
 .cover .kicker{font:600 12px var(--sans);letter-spacing:.18em;text-transform:uppercase;color:#C9E39A}
-.cover h1{font:300 clamp(50px,8vw,132px)/.95 var(--serif);letter-spacing:-.035em;margin:18px 0 22px;max-width:12ch}
+.cover h1{font:300 clamp(42px,min(7.4vw,12vh),132px)/.95 var(--serif);letter-spacing:-.035em;margin:clamp(8px,1.6vh,18px) 0 clamp(12px,2.4vh,22px);max-width:12ch}
 .cover h1 em{font-style:italic}
 .cover__row{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,4fr);gap:24px 64px;align-items:end}
 .cover .stand{font:italic 400 clamp(19px,1.7vw,24px)/1.4 var(--serif);margin:0 0 26px;max-width:40ch;color:rgba(243,239,230,.92)}
@@ -659,31 +682,31 @@ form.done .form-status{font:300 clamp(26px,2.6vw,34px)/1.25 var(--serif);color:v
     <div><span class="svc__no" aria-hidden="true">i.</span><h2 id="h-surveying" class="rv">Land Surveying</h2><p class="short rv">Accurate and reliable data for your development projects.</p><p class="body rv">Good decisions start with good data. Our surveyors map your land, confirm its legal boundaries and set out the work on site, so designers and builders work from the same accurate picture.</p><ul class="ticks rv"><li>Boundary redefinition and cross-lease to freehold</li><li>Topographical surveys and set out</li><li>Drone inspections and 3D laser scanning</li></ul><p class="body rv" style="margin-top:16px"><b>Includes:</b> Boundary redefinition, Cross-lease to freehold, Topographical surveys, Set out, Drone inspections, 3D laser scanning.</p>
       <a class="pill mag" href="contact.html"><span class="dot"></span>Ask about land surveying</a></div>
   </article></div>
-</section><section class="sheet sand" aria-labelledby="h-planning">
+</section><section class="sheet sand cv" aria-labelledby="h-planning">
   <div class="wrap"><article class="svc svc--flip" id="planning">
     <div class="svc__media"><figure class="m1 mask"><img src="../../assets/img/team-plans-800.webp" srcset="../../assets/img/team-plans-800.webp 800w, ../../assets/img/team-plans-1600.webp 1600w" sizes="(min-width: 861px) 36vw, 80vw" width="1600" height="1069" alt="Engineers and planners reviewing plans around a table" loading="lazy" decoding="async"></figure><figure class="m2 mask"><img src="../../assets/img/plan-engineering-800.webp" srcset="../../assets/img/plan-engineering-800.webp 800w, ../../assets/img/plan-engineering-1600.webp 1600w, ../../assets/img/plan-engineering-2400.webp 2400w" sizes="(min-width: 861px) 18vw, 40vw" width="2400" height="1696" alt="Engineering layout plan for a residential development" loading="lazy" decoding="async"></figure></div>
     <div><span class="svc__no" aria-hidden="true">ii.</span><h2 id="h-planning" class="rv">RMA Planning</h2><p class="short rv">Advice on zoning, land use and resource consent applications.</p><p class="body rv">Our planners explain what your zone allows, what consents you need and how to get them. We prepare clear, well-evidenced applications and work with council through to a decision.</p><ul class="ticks rv"><li>Zoning and land use advice</li><li>Resource consent applications</li><li>Feasibility reports and hearings evidence</li><li>Plan changes</li></ul><p class="body rv" style="margin-top:16px"><b>Includes:</b> Zoning and land use advice, Resource consent applications, Feasibility reports, Hearings evidence, Plan changes.</p>
       <a class="pill mag" href="contact.html"><span class="dot"></span>Ask about RMA planning</a></div>
   </article></div>
-</section><section class="sheet paper" aria-labelledby="h-engineering">
+</section><section class="sheet paper cv" aria-labelledby="h-engineering">
   <div class="wrap"><article class="svc" id="engineering">
     <div class="svc__media"><figure class="m1 mask"><img src="../../assets/img/engineer-scaffold-800.webp" srcset="../../assets/img/engineer-scaffold-800.webp 800w, ../../assets/img/engineer-scaffold-1253.webp 1253w" sizes="(min-width: 861px) 36vw, 80vw" width="1253" height="836" alt="Engineer standing in front of scaffolding on a construction site" loading="lazy" decoding="async"></figure><figure class="m2 mask"><img src="../../assets/img/roadworks-800.webp" srcset="../../assets/img/roadworks-800.webp 800w, ../../assets/img/roadworks-1600.webp 1600w" sizes="(min-width: 861px) 18vw, 40vw" width="1600" height="759" alt="Road and kerb construction in progress" loading="lazy" decoding="async"></figure></div>
     <div><span class="svc__no" aria-hidden="true">iii.</span><h2 id="h-engineering" class="rv">Engineering</h2><p class="short rv">Infrastructure that is robust and compliant.</p><p class="body rv">We design the roads, pipes and earthworks that make a site work. Our engineers keep designs practical to build, compliant with council standards and ready for the long term.</p><ul class="ticks rv"><li>Roads, stormwater and three waters</li><li>Earthworks and flood engineering</li><li>Construction monitoring</li></ul><p class="body rv" style="margin-top:16px"><b>Includes:</b> Roads, Stormwater, Three waters, Earthworks, Flood engineering, Construction monitoring.</p>
       <a class="pill mag" href="contact.html"><span class="dot"></span>Ask about engineering</a></div>
   </article></div>
-</section><section class="sheet sand" aria-labelledby="h-landscape">
+</section><section class="sheet sand cv" aria-labelledby="h-landscape">
   <div class="wrap"><article class="svc svc--flip" id="landscape">
     <div class="svc__media"><figure class="m1 mask"><img src="../../assets/img/lookout-seat-800.webp" srcset="../../assets/img/lookout-seat-800.webp 800w, ../../assets/img/lookout-seat-1600.webp 1600w" sizes="(min-width: 861px) 36vw, 80vw" width="1600" height="1067" alt="Curved bench at a park lookout with harbour views" loading="lazy" decoding="async"></figure><figure class="m2 mask"><img src="../../assets/img/playground-aerial-800.webp" srcset="../../assets/img/playground-aerial-800.webp 800w, ../../assets/img/playground-aerial-1600.webp 1600w" sizes="(min-width: 861px) 18vw, 40vw" width="1600" height="784" alt="Aerial view of a new playground and plaza" loading="lazy" decoding="async"></figure></div>
     <div><span class="svc__no" aria-hidden="true">iv.</span><h2 id="h-landscape" class="rv">Landscape Architecture</h2><p class="short rv">Every aspect of the outdoor design process.</p><p class="body rv">Our landscape architects shape the spaces between buildings. From public parks to private gardens, we design places that look good, work well and suit their setting.</p><ul class="ticks rv"><li>Open space design</li><li>Landscape and visual assessments</li><li>Planting plans</li></ul><p class="body rv" style="margin-top:16px"><b>Includes:</b> Open space design, Landscape and visual assessments, Planting plans.</p>
       <a class="pill mag" href="contact.html"><span class="dot"></span>Ask about landscape architecture</a></div>
   </article></div>
-</section><section class="sheet paper" aria-labelledby="h-environmental">
+</section><section class="sheet paper cv" aria-labelledby="h-environmental">
   <div class="wrap"><article class="svc" id="environmental">
     <div class="svc__media"><figure class="m1 mask"><img src="../../assets/img/stream-800.webp" srcset="../../assets/img/stream-800.webp 800w, ../../assets/img/stream-1024.webp 1024w" sizes="(min-width: 861px) 36vw, 80vw" width="1024" height="683" alt="Stream with a culvert and native bush" loading="lazy" decoding="async"></figure><figure class="m2 mask"><img src="../../assets/img/bush-800.webp" srcset="../../assets/img/bush-800.webp 800w, ../../assets/img/bush-1512.webp 1512w" sizes="(min-width: 861px) 18vw, 40vw" width="1512" height="2016" alt="Native bush on a hillside" loading="lazy" decoding="async"></figure></div>
     <div><span class="svc__no" aria-hidden="true">v.</span><h2 id="h-environmental" class="rv">Environmental Services</h2><p class="short rv">Management plans, ecology, soil and water testing, and asbestos.</p><p class="body rv">We look after the ground beneath every project. Our ecologists and contamination specialists test, report and plan, so your development meets its environmental obligations.</p><ul class="ticks rv"><li>Environmental Management Plans</li><li>Ecology and ecological assessments</li><li>Soil and water contamination testing</li><li>Asbestos surveys</li></ul><p class="body rv" style="margin-top:16px"><b>Includes:</b> Environmental Management Plans, Ecology, Soil contamination testing, Water contamination testing, Asbestos.</p>
       <a class="pill mag" href="contact.html"><span class="dot"></span>Ask about environmental services</a></div>
   </article></div>
-</section><section class="sheet sand" aria-labelledby="h-project-management">
+</section><section class="sheet sand cv" aria-labelledby="h-project-management">
   <div class="wrap"><article class="svc svc--flip" id="project-management">
     <div class="svc__media"><figure class="m1 mask"><img src="../../assets/img/site-visit-800.webp" srcset="../../assets/img/site-visit-800.webp 800w, ../../assets/img/site-visit-1600.webp 1600w" sizes="(min-width: 861px) 36vw, 80vw" width="1600" height="1067" alt="Two consultants in hi-vis inspecting new townhouses" loading="lazy" decoding="async"></figure><figure class="m2 mask"><img src="../../assets/img/earthworks-sunset-800.webp" srcset="../../assets/img/earthworks-sunset-800.webp 800w, ../../assets/img/earthworks-sunset-1600.webp 1600w" sizes="(min-width: 861px) 18vw, 40vw" width="1600" height="757" alt="Earthworks site at sunset" loading="lazy" decoding="async"></figure></div>
     <div><span class="svc__no" aria-hidden="true">vi.</span><h2 id="h-project-management" class="rv">Project Management</h2><p class="short rv">From concept to completion, we oversee the entire process.</p><p class="body rv">One point of contact keeps every consultant, contractor and council step aligned. We manage programme and budget and keep you informed at each stage.</p><ul class="ticks rv"><li>One accountable person from day one</li><li>Programme and budget control</li><li>Consultant and contractor coordination</li></ul><p class="body rv" style="margin-top:16px"><b>Includes:</b> Concept to completion, Programme and budget control, Consultant and contractor coordination, Regular client reporting.</p>
@@ -692,16 +715,16 @@ form.done .form-status{font:300 clamp(26px,2.6vw,34px)/1.25 var(--serif);color:v
 </section>
 <section class="sheet forest cv" id="process" aria-labelledby="proc-h">
   <div class="wrap"><div class="head"><div><span class="eyebrow">The journey</span><h2 class="h rv" id="proc-h">Four stages, <em>one</em> story.</h2></div><p class="lede rv">One team carries your project from the first site visit to the final handover.</p></div>
-  <div class="stack"><article class="pc" style="--i:0"><span class="pc__dim" aria-hidden="true"></span>
+  <div class="stack"><article class="pc" style="--i:0">
   <div class="pc__txt"><span class="eyebrow">Stage 01</span><span class="pc__no" aria-hidden="true" style="margin-top:14px">i.</span><h3>Understand the site</h3><p>We survey, test and investigate your land to understand its constraints and opportunities before you commit.</p><ul class="ticks"><li>Topographical and boundary survey</li><li>Contamination and ecology checks</li><li>Feasibility advice</li></ul></div>
   <figure class="pc__img"><img src="../../assets/img/surveyor-road-800.webp" srcset="../../assets/img/surveyor-road-800.webp 800w, ../../assets/img/surveyor-road-1600.webp 1600w" sizes="(min-width: 861px) 40vw, 92vw" width="1600" height="1080" alt="Surveyor setting up an instrument beside a road" loading="lazy" decoding="async"></figure>
-</article><article class="pc" style="--i:1"><span class="pc__dim" aria-hidden="true"></span>
+</article><article class="pc" style="--i:1">
   <div class="pc__txt"><span class="eyebrow">Stage 02</span><span class="pc__no" aria-hidden="true" style="margin-top:14px">ii.</span><h3>Design &amp; consent</h3><p>Our engineers, planners and landscape architects design the scheme together and prepare your resource consent application.</p><ul class="ticks"><li>Engineering and landscape design</li><li>Resource consent application</li><li>Council liaison and hearings</li></ul></div>
   <figure class="pc__img"><img src="../../assets/img/team-plans-800.webp" srcset="../../assets/img/team-plans-800.webp 800w, ../../assets/img/team-plans-1600.webp 1600w" sizes="(min-width: 861px) 40vw, 92vw" width="1600" height="1069" alt="Engineers and planners reviewing plans around a table" loading="lazy" decoding="async"></figure>
-</article><article class="pc" style="--i:2"><span class="pc__dim" aria-hidden="true"></span>
+</article><article class="pc" style="--i:2">
   <div class="pc__txt"><span class="eyebrow">Stage 03</span><span class="pc__no" aria-hidden="true" style="margin-top:14px">iii.</span><h3>Deliver on site</h3><p>We set out the works, monitor construction and manage the programme so the build matches the design.</p><ul class="ticks"><li>Set out</li><li>Construction monitoring</li><li>Programme and budget control</li></ul></div>
   <figure class="pc__img"><img src="../../assets/img/roadworks-800.webp" srcset="../../assets/img/roadworks-800.webp 800w, ../../assets/img/roadworks-1600.webp 1600w" sizes="(min-width: 861px) 40vw, 92vw" width="1600" height="759" alt="Road and kerb construction in progress" loading="lazy" decoding="async"></figure>
-</article><article class="pc" style="--i:3"><span class="pc__dim" aria-hidden="true"></span>
+</article><article class="pc" style="--i:3">
   <div class="pc__txt"><span class="eyebrow">Stage 04</span><span class="pc__no" aria-hidden="true" style="margin-top:14px">iv.</span><h3>Complete &amp; hand over</h3><p>We close out the project with as-built information, council sign-off and titles, then hand everything over to you.</p><ul class="ticks"><li>As-built surveys</li><li>Council sign-off</li><li>Titles and handover</li></ul></div>
   <figure class="pc__img"><img src="../../assets/img/aerial-street-800.webp" srcset="../../assets/img/aerial-street-800.webp 800w, ../../assets/img/aerial-street-1280.webp 1280w" sizes="(min-width: 861px) 40vw, 92vw" width="1280" height="719" alt="Aerial view of new homes along a freshly built street" loading="lazy" decoding="async"></figure>
 </article></div></div>
@@ -712,7 +735,7 @@ form.done .form-status{font:300 clamp(26px,2.6vw,34px)/1.25 var(--serif);color:v
 </section>
 <section class="sheet paper band cv" aria-labelledby="band-h">
   <div class="wrap band__in">
-    <div><span class="eyebrow">Begin</span><h2 class="h rv" id="band-h">Let’s begin with a <em>conversation.</em></h2>
+    <div><span class="eyebrow">Begin</span><h2 class="h" id="band-h">Let’s begin with a <em>conversation.</em></h2>
       <div class="band__ph"><span>Auckland <a href="tel:+6498361804">09 836 1804</a></span><span>Manukau <a href="tel:+6498696070">09 869 6070</a></span></div></div>
     <div class="band__ctas rv">
       <a class="pill  mag" href="contact.html"><span class="dot"></span>Book Your Free Development Consultation</a>
@@ -902,6 +925,15 @@ $$('[data-carousel]').forEach(function(car){
   mark();
 });
 
+/* horizontal reels/carousels: slides that sit partly or fully outside the viewport are hidden from assistive tech until they scroll in */
+$$('[data-track]').forEach(function(track){
+  io($$('[data-track] > *', track.parentNode).filter(function(el){ return el.parentNode === track; }), function(el, v, en){
+    var r = en ? en.boundingClientRect : el.getBoundingClientRect();
+    var out = r.left < -1 || r.right > innerWidth + 1;
+    if (out) el.setAttribute('aria-hidden', 'true'); else el.removeAttribute('aria-hidden');
+  }, {threshold:[0, .2, .4, .6, .8, .95, 1]});
+});
+
 /* tabs (testimonials) */
 $$('[data-tabs]').forEach(function(box){
   var tabs = $$('[role=tab]', box), panels = $$('[role=tabpanel]', box), cur = 0, timer, auto = +box.dataset.auto || 0, vis = false;
@@ -1076,8 +1108,8 @@ document.addEventListener('DOMContentLoaded', function(){
     /* process cards settle back as the next arrives */
     T.$$('.pc').forEach(function(c, i, all){
       if (i === all.length - 1) return;
-      gsap.to(c, {scale:.95, ease:'none', scrollTrigger:{trigger:all[i + 1], start:'top 85%', end:'top 30%', scrub:true}});
-      gsap.to(c.querySelector('.pc__dim'), {opacity:.4, ease:'none', scrollTrigger:{trigger:all[i + 1], start:'top 85%', end:'top 30%', scrub:true}});
+      if (matchMedia('(max-height: 760px)').matches) return;
+      gsap.to(c, {scale:.96, ease:'none', scrollTrigger:{trigger:all[i + 1], start:'top 85%', end:'top 30%', scrub:true}});
     });
     /* slow parallax on hero and arched photos */
     T.$$('.phero__img img, .people .a img, .svc__media .m1 img').forEach(function(im){
